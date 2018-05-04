@@ -1,0 +1,2 @@
+people/face_detector:people/leg_detector:people/people:people/people_msgs:people/people_tracking_filter:people/people_velocity_tracker
+-DCATKIN_DEVEL_PREFIX=/home/hanna/wg-perception_ws/devel -DCMAKE_INSTALL_PREFIX=/home/hanna/wg-perception_ws/install -G Unix Makefiles
