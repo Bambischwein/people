@@ -1,23 +1,21 @@
 <launch>
 
-  <!-- Following args `camera` and `depth_ns` together consist the namespace prefix, and the args `*_topic` make the body of the topic for face_detector node to subscribe. In the example below, you're subscribing to: 
 
-        /camera/rgb/image_rect_color
-        /camera/depth_ns/image_rect_raw 
-   -->
-  <arg name="camera" default="camera" />
-  <arg name="rgb_ns" default="rgb" />  
-  <arg name="depth_ns" default="depth_registered" />
+<!--node pkg="tf" type="static_transform_publisher" name="link1_broadcaster" args="0 0 0 0 0 0 base_link CameraDepth_frame 10" /-->
+  
+  <arg name="camera" default="pepper_robot" />
+  <arg name="rgb_ns" default="camera/front" />  
+  <arg name="depth_ns" default="camera/depth" />
   <arg name="image_topic" default="image_rect_color" />
-  <arg name="depth_topic" default="image_rect_raw" />
-  <arg name="fixed_frame" default="camera_rgb_optical_frame" />
+  <arg name="depth_topic" default="image_rect" />
+  <arg name="fixed_frame" default="CameraDepth_optical_frame" />
 
   <arg name="paramfile_classifier" default="$(find face_detector)/param/classifier.yaml"/>
 
   <!--include file="$(find openni_launch)/launch/openni.launch"/-->
-  <node name="$(anon dynparam)" pkg="dynamic_reconfigure" type="dynparam" args="set_from_parameters $(arg camera)/driver">
+  <!--node name="$(anon dynparam)" pkg="dynamic_reconfigure" type="dynparam" args="set_from_parameters $(arg camera)/$(arg rgb_ns)/driver">
     <param name="depth_registration" type="bool" value="true" />
-  </node>
+  </node-->
 
   <include file="$(find face_detector)/launch/face_detector_common.launch">
     <arg name="camera" value="$(arg camera)" />
